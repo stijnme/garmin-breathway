@@ -1,0 +1,13 @@
+project.manifest = manifest.xml
+
+# Source files. Unit tests use the (:test) annotation and are only compiled
+# in when building with --unit-test, so it's safe to include them unconditionally.
+base.sourcePath = source;test
+
+# Resources shared by all devices
+base.resourcePath = resources
+
+# Example of per-device resource overrides once you diverge (e.g. round vs
+# semi-round vs rectangular screens):
+# round = venu3;epix2
+# round.resourcePath = resources-round

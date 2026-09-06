@@ -1,0 +1,20 @@
+# Build output
+bin/
+gen/
+*.prg
+*.iq
+*.debug.xml
+
+# Signing key — never commit this
+developer_key.der
+*.der
+
+# SDK manager / local tooling state
+.Garmin/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+
+# VS Code Monkey C extension caches
+.vscode/*.log

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application
+        id="6067a557-3b4a-4abb-a98b-e0a0bc175c32"
+        type="watch-app"
+        name="@Strings.AppName"
+        entry="BreathwayApp"
+        launcherIcon="@Drawables.LauncherIcon"
+        minSdkVersion="4.2.0">
+
+        <!-- Target devices. Add more <iq:product/> entries as you broaden support. -->
+        <iq:products>
+            <iq:product id="fenix7"/>
+            <iq:product id="fr265"/>
+            <iq:product id="fr965"/>
+            <iq:product id="fenix8solar51mm"/>
+        </iq:products>
+
+        <iq:permissions>
+            <!-- Uncomment as features are added -->
+            <!-- <iq:uses-permission id="Sensor"/> -->
+            <!-- <iq:uses-permission id="UserProfile"/> -->
+        </iq:permissions>
+
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

@@ -1,0 +1,8 @@
+{
+    "monkeyC.jungleFiles": "monkey.jungle",
+    "monkeyC.typeCheckLevel": "Informative",
+    "monkeyC.excludeAnnotations": "",
+    "files.associations": {
+        "*.mc": "monkeyc"
+    }
+}
