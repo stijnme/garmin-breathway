@@ -45,21 +45,22 @@ Key files:
 ## Build & test commands
 
 Once the SDK is installed and `monkeyc`/`monkeydo` are on `PATH` (or full
-paths are known), typical commands are:
+paths are known), typical commands are (`$(cat VERSION)` reads the current
+project version — see "Versioning" below):
 
 ```bash
 # Compile
-monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway.prg -y developer_key
+monkeyc -f monkey.jungle -d fenix7s -o "build/breathway-$(cat VERSION).prg" -y developer_key
 
 # Run in simulator (start the simulator app first, then):
-monkeydo tmp/breathway.prg fenix7s
+monkeydo "build/breathway-$(cat VERSION).prg" fenix7s
 
 # Compile & run unit tests
-monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway-test.prg -y developer_key --unit-test
-monkeydo tmp/breathway-test.prg fenix7s -t
+monkeyc -f monkey.jungle -d fenix7s -o "build/breathway-test-$(cat VERSION).prg" -y developer_key --unit-test
+monkeydo "build/breathway-test-$(cat VERSION).prg" fenix7s -t
 ```
 
-**Keep all build/scratch output inside the project's `tmp/` directory**
+**Keep all build/scratch output inside the project's `build/` directory**
 (gitignored) — never write build artifacts, test binaries, or scratch repro
 files to `/tmp` or other locations outside the repo. This keeps the project
 fully self-contained. Also avoid backgrounding processes (`&` + `kill %1`
@@ -68,10 +69,36 @@ permission prompts for what should be a plain foreground command. Prefer
 `monkeydo ... -t` (which exits on its own) over launching the app
 interactively when you just need to verify a build.
 
+**Only keep the latest build artifacts in `build/`** — before writing a new
+`breathway-*.prg` or `breathway-test-*.prg`, remove any previously-built ones
+(e.g. `rm -f build/breathway-*.prg` / `rm -f build/breathway-test-*.prg`) so
+the folder doesn't accumulate stale binaries from earlier versions or runs.
+The VS Code Monkey C extension also writes its own build cache into `build/`
+(`build/gen/`, `build/mir/`, `build/*.debug.xml`, etc.) — that's managed by
+the extension itself and is fine to leave alone; the pruning rule above only
+applies to the `.prg` files produced by manual/agent `monkeyc` invocations.
+
+### Versioning
+
+The project version lives in the plain-text `VERSION` file at the repo root
+(e.g. `0.3.0`), following `major.minor.patch` semver-style numbering:
+- **patch** — bug fixes, no behavior/feature changes.
+- **minor** — new features (e.g. completing a `PLAN.md` milestone).
+- **major** — reserved for a 1.0 release-ready milestone (M5) or later
+  breaking changes.
+
+Bump `VERSION` as part of the commit that completes the corresponding
+change (do not bump speculatively). Build artifact filenames embed this
+version (see commands above) so a given `.prg` in `build/` is always
+traceable to the exact source state it was built from.
+
 Prefer using the **Monkey C VS Code extension** commands ("Build Current
 Project", "Run Current Project in Simulator", "Run Tests") when working
 interactively — `.vscode/launch.json` and `.vscode/settings.json` are
-pre-configured for it.
+pre-configured for it. That launch config targets a stable, unversioned
+`build/breathway.prg` (VS Code debug configs need a fixed path), which is
+separate from the version-tagged `build/breathway-<version>.prg` produced
+by manual/agent CLI builds described above.
 
 There is no separate linter; rely on the extension's built-in Monkey C type
 checker (`monkeyC.typeCheckLevel` in `.vscode/settings.json`, currently
@@ -91,8 +118,8 @@ something to fix, not ignore.
   `BehaviorDelegate`. Avoid business logic (breathing-phase timing, pattern
   definitions) living only inside the view — extract into plain classes as
   the app grows so it can be unit tested (see `test/BreathwayTests.mc`).
-- Never commit `developer_key` (or `developer_key.der`) or any `bin/`/`gen/`
-  build output (already covered by `.gitignore`).
+- Never commit `developer_key` (or `developer_key.der`) or any `bin/`/`build/`/
+  `gen/` build output (already covered by `.gitignore`).
 - Resource strings go in `resources/strings/strings.xml` and are referenced
   as `@Strings.Name`; drawables in `resources/drawables/drawables.xml` as
   `@Drawables.Name`.

@@ -5,7 +5,7 @@
             "type": "monkeyc",
             "request": "launch",
             "name": "Run Breathway (simulator)",
-            "program": "${workspaceFolder}/tmp/breathway.prg",
+            "program": "${workspaceFolder}/build/breathway.prg",
             "manifest": "${workspaceFolder}/manifest.xml",
             "jungleFiles": "${workspaceFolder}/monkey.jungle",
             "device": "fenix7s",

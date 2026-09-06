@@ -31,25 +31,30 @@ and phase cues.
 
 ## Build
 
+Build artifacts go in `build/` (gitignored), named with the current project
+version from the `VERSION` file (`major.minor.patch`, e.g. `0.3.0`):
+
 ```bash
-monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway.prg -y developer_key
+monkeyc -f monkey.jungle -d fenix7s -o "build/breathway-$(cat VERSION).prg" -y developer_key
 ```
 
 ## Run in simulator
 
 ```bash
 # Start the Connect IQ simulator once, then:
-monkeydo tmp/breathway.prg fenix7s
+monkeydo "build/breathway-$(cat VERSION).prg" fenix7s
 ```
 
 Or use the VS Code Monkey C extension's "Run Current Project in Simulator"
-command — `.vscode/launch.json` is preconfigured for the `fenix7s` device.
+command — `.vscode/launch.json` is preconfigured for the `fenix7s` device
+(targeting a stable `build/breathway.prg`, separate from the version-tagged
+builds above).
 
 ## Run on a physical device (macOS)
 
 Build for your actual device (e.g. `-d fenix7` instead of `-d fenix7s`), then
-copy the resulting `.prg` into `GARMIN/APPS/` on the watch when it's
-connected via USB.
+copy the resulting `.prg` from `build/` into `GARMIN/APPS/` on the watch when
+it's connected via USB.
 
 **Note for macOS:** some Garmin watches (Fenix 7 and similar models with
 onboard music storage) can connect in either **"Garmin"** or **"MTP"** USB
@@ -68,8 +73,8 @@ then use its file browser to copy the `.prg` into `GARMIN/APPS/`.
 ## Test
 
 ```bash
-monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway-test.prg -y developer_key --unit-test
-monkeydo tmp/breathway-test.prg fenix7s -t
+monkeyc -f monkey.jungle -d fenix7s -o "build/breathway-test-$(cat VERSION).prg" -y developer_key --unit-test
+monkeydo "build/breathway-test-$(cat VERSION).prg" fenix7s -t
 ```
 
 ## Project layout
@@ -77,6 +82,7 @@ monkeydo tmp/breathway-test.prg fenix7s -t
 ```
 manifest.xml          App metadata, id, target devices, permissions
 monkey.jungle          Build configuration (source/resource paths)
+VERSION                Current project version (major.minor.patch)
 source/                Monkey C source (.mc)
 resources/             Strings, drawables, layouts (XML)
 test/                  Unit tests using the (:test) annotation
