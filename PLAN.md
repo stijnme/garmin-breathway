@@ -27,17 +27,17 @@ phone pairing required.
 - [x] Confirm simulator run via `monkeydo` / VS Code "Run" command
 - [x] Confirm `--unit-test` build + `monkeydo -t` runs the placeholder test
 
-### M2 — Core breathing loop (next)
-- [ ] Extract breathing-pattern state machine out of `BreathwayView` into a
+### M2 — Core breathing loop (done)
+- [x] Extract breathing-pattern state machine out of `BreathwayView` into a
       plain, unit-testable class (e.g. `BreathingSession`)
-- [ ] Support at least one configurable pattern with
+- [x] Support at least one configurable pattern with
       real unit tests for phase transitions and countdown behavior:
       - box breathing 4-1-6-1 = 4 in, 1 hold, 6 out, 1 hold
-- [ ] Smooth circle animation (avoid visible stepping at 1Hz timer tick;
+- [x] Smooth circle animation (avoid visible stepping at 1Hz timer tick;
       consider higher-frequency timer or eased interpolation)
-- [ ] Start/pause/resume via `onSelect`; confirm `onBack` exits cleanly
+- [x] Start/pause/resume via `onSelect`; confirm `onBack` exits cleanly
 
-### M3 — Feedback & settings
+### M3 — Feedback & settings (next)
 - [ ] Haptic pulse on phase change (`Toybox.Attention` if device supports it)
 - [ ] Session length / number-of-cycles setting (persisted via
       `Application.Storage` or `Properties`)

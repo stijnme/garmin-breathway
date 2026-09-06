@@ -1,6 +1,7 @@
 # Build output
 bin/
 gen/
+tmp/
 *.prg
 *.iq
 *.debug.xml
