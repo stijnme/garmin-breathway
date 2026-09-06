@@ -6,6 +6,7 @@ gen/
 *.debug.xml
 
 # Signing key — never commit this
+developer_key
 developer_key.der
 *.der
 

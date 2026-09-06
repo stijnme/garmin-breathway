@@ -18,7 +18,7 @@ class BreathwayApp extends Application.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() as Array<Views or InputDelegates>? {
+    function getInitialView() as [Views] or [Views, InputDelegates] {
         var view = new BreathwayView();
         var delegate = new BreathwayDelegate(view);
         return [view, delegate];

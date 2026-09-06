@@ -20,14 +20,14 @@ phone pairing required.
 - [x] Editor config (VS Code Monkey C extension settings/launch config)
 - [x] AGENTS.md / PLAN.md / README.md
 
-### M1 — Toolchain bring-up (next)
-- [ ] Install Garmin Connect IQ SDK + accept license via `sdkmanager`
-- [ ] Generate a developer signing key (`developer_key.der`, gitignored)
-- [ ] Confirm `monkeyc` compiles `monkey.jungle` for `fenix7`
-- [ ] Confirm simulator run via `monkeydo` / VS Code "Run" command
-- [ ] Confirm `--unit-test` build + `monkeydo -t` runs the placeholder test
+### M1 — Toolchain bring-up (done)
+- [x] Install Garmin Connect IQ SDK + accept license via `sdkmanager`
+- [x] Generate a developer signing key (`developer_key`, gitignored)
+- [x] Confirm `monkeyc` compiles `monkey.jungle` for `fenix7s`
+- [x] Confirm simulator run via `monkeydo` / VS Code "Run" command
+- [x] Confirm `--unit-test` build + `monkeydo -t` runs the placeholder test
 
-### M2 — Core breathing loop
+### M2 — Core breathing loop (next)
 - [ ] Extract breathing-pattern state machine out of `BreathwayView` into a
       plain, unit-testable class (e.g. `BreathingSession`)
 - [ ] Support at least one configurable pattern with

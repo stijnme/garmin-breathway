@@ -20,9 +20,10 @@ circle and phase labels.
 - Entry point: `BreathwayApp` (`source/BreathwayApp.mc`)
 - Primary view: `BreathwayView` (`source/BreathwayView.mc`)
 - Input delegate: `BreathwayDelegate` (`source/BreathwayDelegate.mc`)
-- Initial target devices: fenix7, fr265, fr965, fenix8solar51mm (semi-round
-  Fenix/Forerunner family). Add more in `manifest.xml` under `<iq:products>`
-  and, if resources need to diverge, in `monkey.jungle`.
+- Initial target devices: fenix7, fenix7s, fr265, fr965, fenix8solar51mm
+  (semi-round Fenix/Forerunner family). Default simulator/debug target is
+  `fenix7s` (see `.vscode/launch.json`). Add more in `manifest.xml` under
+  `<iq:products>` and, if resources need to diverge, in `monkey.jungle`.
 
 ## Toolchain
 
@@ -48,14 +49,14 @@ paths are known), typical commands are:
 
 ```bash
 # Compile
-monkeyc -f monkey.jungle -d fenix7 -o bin/breathway.prg -y developer_key.der
+monkeyc -f monkey.jungle -d fenix7s -o bin/breathway.prg -y developer_key
 
 # Run in simulator (start the simulator app first, then):
-monkeydo bin/breathway.prg fenix7
+monkeydo bin/breathway.prg fenix7s
 
 # Compile & run unit tests
-monkeyc -f monkey.jungle -d fenix7 -o bin/breathway-test.prg -y developer_key.der --unit-test
-monkeydo bin/breathway-test.prg fenix7 -t
+monkeyc -f monkey.jungle -d fenix7s -o bin/breathway-test.prg -y developer_key --unit-test
+monkeydo bin/breathway-test.prg fenix7s -t
 ```
 
 Prefer using the **Monkey C VS Code extension** commands ("Build Current
@@ -81,8 +82,8 @@ something to fix, not ignore.
   `BehaviorDelegate`. Avoid business logic (breathing-phase timing, pattern
   definitions) living only inside the view — extract into plain classes as
   the app grows so it can be unit tested (see `test/BreathwayTests.mc`).
-- Never commit `developer_key.der` or any `bin/`/`gen/` build output (already
-  covered by `.gitignore`).
+- Never commit `developer_key` (or `developer_key.der`) or any `bin/`/`gen/`
+  build output (already covered by `.gitignore`).
 - Resource strings go in `resources/strings/strings.xml` and are referenced
   as `@Strings.Name`; drawables in `resources/drawables/drawables.xml` as
   `@Drawables.Name`.

@@ -12,7 +12,7 @@ and phase cues.
 - Package id: `be.melxaco.breathway`
 - App type: Watch App
 - Language: Monkey C
-- Initial target devices: fenix7, fr265, fr965, fenix8solar51mm
+- Initial target devices: fenix7, fenix7s, fr265, fr965, fenix8solar51mm
 
 ## Prerequisites
 
@@ -20,35 +20,36 @@ and phase cues.
    https://developer.garmin.com/connect-iq/sdk/
 2. Install the **Monkey C** extension for VS Code (recommended), or use the
    `monkeyc` / `monkeydo` / `sdkmanager` CLI tools directly.
-3. Generate a developer signing key (one-time, per machine):
+3. Generate a developer signing key (one-time, per machine). The Monkey C
+   VS Code extension can generate one for you, or use `openssl` directly:
    ```bash
    openssl genrsa -out developer_key.pem 4096
    openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem \
-     -out developer_key.der -nocrypt
+     -out developer_key -nocrypt
    ```
-   `developer_key.der` is gitignored — never commit it.
+   `developer_key` is gitignored — never commit it.
 
 ## Build
 
 ```bash
-monkeyc -f monkey.jungle -d fenix7 -o bin/breathway.prg -y developer_key.der
+monkeyc -f monkey.jungle -d fenix7s -o bin/breathway.prg -y developer_key
 ```
 
 ## Run in simulator
 
 ```bash
 # Start the Connect IQ simulator once, then:
-monkeydo bin/breathway.prg fenix7
+monkeydo bin/breathway.prg fenix7s
 ```
 
 Or use the VS Code Monkey C extension's "Run Current Project in Simulator"
-command — `.vscode/launch.json` is preconfigured for the `fenix7` device.
+command — `.vscode/launch.json` is preconfigured for the `fenix7s` device.
 
 ## Test
 
 ```bash
-monkeyc -f monkey.jungle -d fenix7 -o bin/breathway-test.prg -y developer_key.der --unit-test
-monkeydo bin/breathway-test.prg fenix7 -t
+monkeyc -f monkey.jungle -d fenix7s -o bin/breathway-test.prg -y developer_key --unit-test
+monkeydo bin/breathway-test.prg fenix7s -t
 ```
 
 ## Project layout

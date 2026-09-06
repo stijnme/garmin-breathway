@@ -57,7 +57,8 @@ class BreathwayView extends WatchUi.View {
     function onTick() as Void {
         _secondsInPhase += 1;
         var currentPhase = PHASES[_phaseIndex];
-        if (_secondsInPhase >= currentPhase.get(:seconds)) {
+        var phaseSeconds = currentPhase.get(:seconds) as Number;
+        if (_secondsInPhase >= phaseSeconds) {
             _secondsInPhase = 0;
             _phaseIndex = (_phaseIndex + 1) % PHASES.size();
         }
