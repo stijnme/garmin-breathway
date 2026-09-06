@@ -7,12 +7,13 @@ import Toybox.Timer;
 // a pulsing circle that expands on inhale and contracts on exhale.
 class BreathwayView extends WatchUi.View {
 
-    // Breathing phase durations in seconds (box breathing: 4-4-4-4 by default).
+    // Breathing phase durations in seconds (4-1-6-1 by default: 4 in, 1 hold,
+    // 6 out, 1 hold).
     private const PHASES as Array<Dictionary> = [
         { :name => "Inhale", :seconds => 4 },
-        { :name => "Hold",   :seconds => 4 },
-        { :name => "Exhale", :seconds => 4 },
-        { :name => "Hold",   :seconds => 4 },
+        { :name => "Hold",   :seconds => 1 },
+        { :name => "Exhale", :seconds => 6 },
+        { :name => "Hold",   :seconds => 1 },
     ];
 
     private var _phaseIndex as Number = 0;

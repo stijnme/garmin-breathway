@@ -13,7 +13,8 @@ Guidance for AI coding agents (and humans) working in this repository.
 
 **Breathway** (`be.melxaco.breathway`) is a Garmin Connect IQ **watch app**
 written in Monkey C. It guides the user through a breathing exercise (default:
-box breathing, 4-4-4-4) with an animated circle and phase labels.
+box breathing, 4-1-6-1 — 4s in, 1s hold, 6s out, 1s hold) with an animated
+circle and phase labels.
 
 - Manifest app id: `6067a557-3b4a-4abb-a98b-e0a0bc175c32`
 - Entry point: `BreathwayApp` (`source/BreathwayApp.mc`)

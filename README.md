@@ -6,7 +6,8 @@
 > `AGENTS.md` for details and git history for the originating commit.
 
 A Garmin Connect IQ watch app that guides you through a breathing exercise
-(default: box breathing, 4-4-4-4) with an animated circle and phase cues.
+(default: 4-1-6-1 — 4s in, 1s hold, 6s out, 1s hold) with an animated circle
+and phase cues.
 
 - Package id: `be.melxaco.breathway`
 - App type: Watch App
