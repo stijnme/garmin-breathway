@@ -45,6 +45,26 @@ monkeydo tmp/breathway.prg fenix7s
 Or use the VS Code Monkey C extension's "Run Current Project in Simulator"
 command — `.vscode/launch.json` is preconfigured for the `fenix7s` device.
 
+## Run on a physical device (macOS)
+
+Build for your actual device (e.g. `-d fenix7` instead of `-d fenix7s`), then
+copy the resulting `.prg` into `GARMIN/APPS/` on the watch when it's
+connected via USB.
+
+**Note for macOS:** some Garmin watches (Fenix 7 and similar models with
+onboard music storage) can connect in either **"Garmin"** or **"MTP"** USB
+mode, selectable on the device. macOS has no built-in MTP support, so in MTP
+mode no drive will mount, even though the connection itself works fine
+(charging, permission prompts, etc.) — it just won't show up in Finder.
+Either switch the watch to **"Garmin" mode** (simplest — mounts as a normal
+drive), or if you need to stay in MTP mode, install an MTP client:
+
+```bash
+brew install --cask android-file-transfer
+```
+
+then use its file browser to copy the `.prg` into `GARMIN/APPS/`.
+
 ## Test
 
 ```bash
