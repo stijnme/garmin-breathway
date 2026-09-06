@@ -30,8 +30,9 @@ phone pairing required.
 ### M2 — Core breathing loop
 - [ ] Extract breathing-pattern state machine out of `BreathwayView` into a
       plain, unit-testable class (e.g. `BreathingSession`)
-- [ ] Support at least one configurable pattern (box breathing 4-4-4-4) with
-      real unit tests for phase transitions and countdown behavior
+- [ ] Support at least one configurable pattern with
+      real unit tests for phase transitions and countdown behavior:
+      - box breathing 4-1-6-1 = 4 in, 1 hold, 6 out, 1 hold
 - [ ] Smooth circle animation (avoid visible stepping at 1Hz timer tick;
       consider higher-frequency timer or eased interpolation)
 - [ ] Start/pause/resume via `onSelect`; confirm `onBack` exits cleanly
@@ -58,7 +59,7 @@ phone pairing required.
 
 ## Open decisions (revisit before M2)
 
-- Which breathing patterns to ship by default (box 4-4-4-4 only, or also
+- Which breathing patterns to ship by default (box 4-1-6-1 only, or also
   4-7-8 / custom user-defined timings)?
 - Whether session progress/history should be tracked at all, or app stays
   fully stateless/ephemeral.
