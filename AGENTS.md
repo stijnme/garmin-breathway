@@ -49,15 +49,24 @@ paths are known), typical commands are:
 
 ```bash
 # Compile
-monkeyc -f monkey.jungle -d fenix7s -o bin/breathway.prg -y developer_key
+monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway.prg -y developer_key
 
 # Run in simulator (start the simulator app first, then):
-monkeydo bin/breathway.prg fenix7s
+monkeydo tmp/breathway.prg fenix7s
 
 # Compile & run unit tests
-monkeyc -f monkey.jungle -d fenix7s -o bin/breathway-test.prg -y developer_key --unit-test
-monkeydo bin/breathway-test.prg fenix7s -t
+monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway-test.prg -y developer_key --unit-test
+monkeydo tmp/breathway-test.prg fenix7s -t
 ```
+
+**Keep all build/scratch output inside the project's `tmp/` directory**
+(gitignored) — never write build artifacts, test binaries, or scratch repro
+files to `/tmp` or other locations outside the repo. This keeps the project
+fully self-contained. Also avoid backgrounding processes (`&` + `kill %1`
+job control) for manual smoke-testing the simulator; it triggers elevated
+permission prompts for what should be a plain foreground command. Prefer
+`monkeydo ... -t` (which exits on its own) over launching the app
+interactively when you just need to verify a build.
 
 Prefer using the **Monkey C VS Code extension** commands ("Build Current
 Project", "Run Current Project in Simulator", "Run Tests") when working
@@ -87,6 +96,14 @@ something to fix, not ignore.
 - Resource strings go in `resources/strings/strings.xml` and are referenced
   as `@Strings.Name`; drawables in `resources/drawables/drawables.xml` as
   `@Drawables.Name`.
+- **Monkey C gotcha:** a `static function` on a `class` cannot reference that
+  same class's own `const`/`enum` members — not even fully qualified as
+  `ClassName.CONST` — the compiler reports "Cannot find symbol on type
+  'self'"/"on type '$.ClassName'". If a file only holds static
+  helpers/constants with no instance state (e.g. `BreathingPatterns.mc`,
+  `BreathwaySettings.mc`), declare it as a `module` instead of a `class`;
+  module-level functions can freely reference the module's own consts and
+  other modules'/classes' consts.
 
 ## What to do when the SDK isn't installed
 

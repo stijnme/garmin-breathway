@@ -37,14 +37,23 @@ phone pairing required.
       consider higher-frequency timer or eased interpolation)
 - [x] Start/pause/resume via `onSelect`; confirm `onBack` exits cleanly
 
-### M3 — Feedback & settings (next)
-- [ ] Haptic pulse on phase change (`Toybox.Attention` if device supports it)
-- [ ] Session length / number-of-cycles setting (persisted via
-      `Application.Storage` or `Properties`)
-- [ ] Settings screen or Connect IQ app settings (`properties.xml` +
-      `settings.xml`) for pattern selection (box / 4-7-8 / custom)
+### M3 — Feedback & settings (done)
+- [x] Haptic pulse on phase change (`Toybox.Attention` if device supports it):
+      short/light buzz entering a hold, longer double-buzz entering an
+      inhale/exhale; guarded by a haptics on/off setting
+- [x] Session length / number-of-cycles setting (persisted via
+      `Application.Storage`): stored in **minutes**, converted to a target
+      cycle count per-pattern so switching patterns preserves the
+      requested duration; default 5 minutes
+- [x] On-device settings screen (`WatchUi.Menu2`, opened via the standard
+      `onMenu()` long-press-Select behavior — no phone pairing / Connect IQ
+      mobile app involved, consistent with the non-goals below) for haptics
+      on/off, session length, and pattern selection (box 4-1-6-1 / 4-7-8)
 
-### M4 — Polish
+See `issues/0001-richer-session-complete-ux.md` for a deferred polish item
+(richer session-complete screen) surfaced while building this milestone.
+
+### M4 — Polish (next)
 - [ ] Round vs semi-round layout tuning (`resources-round` override if needed)
 - [ ] Proper launcher icon (replace placeholder PNG)
 - [ ] Localized strings beyond `eng` if needed
@@ -59,8 +68,9 @@ phone pairing required.
 
 ## Open decisions (revisit before M2)
 
-- Which breathing patterns to ship by default (box 4-1-6-1 only, or also
-  4-7-8 / custom user-defined timings)?
+- ~~Which breathing patterns to ship by default~~ — resolved in M3: box
+  4-1-6-1 and classic 4-7-8, selectable via the on-device settings menu.
+  Custom user-defined timings remain a possible future addition.
 - Whether session progress/history should be tracked at all, or app stays
   fully stateless/ephemeral.
 - Minimum SDK / API level tradeoff vs. device coverage (`minSdkVersion` is

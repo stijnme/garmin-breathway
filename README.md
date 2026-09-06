@@ -32,14 +32,14 @@ and phase cues.
 ## Build
 
 ```bash
-monkeyc -f monkey.jungle -d fenix7s -o bin/breathway.prg -y developer_key
+monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway.prg -y developer_key
 ```
 
 ## Run in simulator
 
 ```bash
 # Start the Connect IQ simulator once, then:
-monkeydo bin/breathway.prg fenix7s
+monkeydo tmp/breathway.prg fenix7s
 ```
 
 Or use the VS Code Monkey C extension's "Run Current Project in Simulator"
@@ -48,8 +48,8 @@ command — `.vscode/launch.json` is preconfigured for the `fenix7s` device.
 ## Test
 
 ```bash
-monkeyc -f monkey.jungle -d fenix7s -o bin/breathway-test.prg -y developer_key --unit-test
-monkeydo bin/breathway-test.prg fenix7s -t
+monkeyc -f monkey.jungle -d fenix7s -o tmp/breathway-test.prg -y developer_key --unit-test
+monkeydo tmp/breathway-test.prg fenix7s -t
 ```
 
 ## Project layout
