@@ -42,6 +42,22 @@ Not part of the M3 (Feedback & settings) scope that was just completed;
 tracked here so it isn't lost. Reasonable candidate for M4 (Polish) or
 whenever button-mapping/UX polish is next picked up.
 
+## Related
+
+- `issues/0004-standard-timer-ui.md` (filed 2026-09-21) adds a visual reset
+  icon (circular arrow) once a session is running/paused. Both this issue's
+  down-button shortcut and 0004's icon should route through the same
+  `BreathwayView.resetSession()` / `BreathingSession.reset()` call rather
+  than diverging into two separate reset code paths — the icon can be
+  thought of as the visual affordance for the same action this issue wires
+  to the down button.
+- `issues/0005-idle-start-screen.md` (filed 2026-09-21) makes "phase 0, 0
+  elapsed, not running" a real, commonly-reached idle state (not just a
+  transient one at launch as it is today). That makes the "no-op when
+  already at phase 0 with 0 elapsed" guard mentioned below more than minor
+  polish once 0005 lands — pressing down on the idle start screen shouldn't
+  cause redraw/haptic churn.
+
 ## Notes for whoever picks this up
 
 - `BreathwayDelegate.mc` is where `onSelect()` / `onMenu()` / `onBack()` are

@@ -47,6 +47,18 @@ naturally with M4 (Polish) or whenever layout work is next picked up —
 session-progress display ideas (e.g. a summary screen), so these two issues
 may be worth tackling together.
 
+## Related
+
+- `issues/0004-standard-timer-ui.md` (filed 2026-09-21): the reference
+  stock-Timer-app screenshot attached there (`0004-standard-timer-ui.jpg`)
+  shows exactly this — a whole-session `mm:ss` countdown (`4:59` counting
+  down to `5:00`) as the dominant central element. 0004 is the most likely
+  vehicle to actually implement this issue's `totalRemainingSeconds()`
+  accessor and `mm:ss` formatting/layout; treat this issue as the detailed
+  design spec for that part of 0004's work rather than a separate,
+  independent task. Consider closing this issue as resolved-via-0004 once
+  that lands, instead of implementing it twice.
+
 ## Notes for whoever picks this up
 
 - `BreathingSession.remainingSeconds()` (existing) only covers the current

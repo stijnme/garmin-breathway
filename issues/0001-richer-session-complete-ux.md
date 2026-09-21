@@ -28,6 +28,17 @@ of likely value:
   behavior feels right in practice on a real device).
 - Optional: a light "confetti"/checkmark animation instead of plain text.
 
+## Related
+
+- `issues/0006-heart-rate-summary-graph.md` (filed 2026-09-21) proposes
+  adding a heart-rate line/bar graph to this same session-complete summary
+  screen. If this issue is picked up first, design the summary screen
+  layout generically enough to add a graph element later (e.g. a
+  reusable "stats block" vs. "graph area" split) rather than hard-coding a
+  text-only layout that 0006 would have to rework. If 0006 is picked up
+  first, it should build the summary screen container this issue
+  describes rather than duplicating it.
+
 ## Why deferred
 
 Doesn't block core M3 functionality (haptics, session length, pattern
