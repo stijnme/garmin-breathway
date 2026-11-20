@@ -1,9 +1,10 @@
 # 0002 — Down button as a "reset session" shortcut once running
 
-**Status:** resolved (v0.4.0) — `BreathwayDelegate.onNextPage()` calls
-`BreathwayView.resetSession()`, a no-op when `isAtStart()`, otherwise
-`BreathingSession.reset()` keeping run/pause state. From the complete screen
-Down returns to the idle start screen (Select still restarts directly).
+**Status:** resolved (v0.4.0; refined in v0.4.1) — `BreathwayDelegate.onNextPage()`
+calls `BreathwayView.resetSession()`, which only resets when
+`BreathingSession.canReset()` (paused or complete, with progress to discard).
+Down is ignored while running (owner decision after on-device testing: avoid
+accidental resets mid-session). Reset lands on the idle start screen.
 **Filed:** 2026-09-06
 
 ## Summary

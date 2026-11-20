@@ -55,7 +55,7 @@ See `issues/0001-richer-session-complete-ux.md` for a deferred polish item
 
 ### M4 — Polish (next)
 - [x] Idle start screen instead of auto-start (issue 0005) and Down-button
-      session reset (issue 0002) — v0.4.0
+      session reset (issue 0002, paused-only since v0.4.1) — v0.4.0
 - [ ] Round vs semi-round layout tuning (`resources-round` override if needed)
 - [ ] Proper launcher icon (replace placeholder PNG)
 - [ ] Localized strings beyond `eng` if needed

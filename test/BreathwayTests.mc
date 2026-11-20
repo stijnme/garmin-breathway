@@ -210,6 +210,29 @@ function testResetRestoresIsAtStartAndKeepsRunning(logger as Test.Logger) as Boo
 }
 
 (:test)
+function testCannotResetWhileRunningOrAtStart(logger as Test.Logger) as Boolean {
+    var session = new BreathingSession(boxPattern(), null);
+    if (session.canReset()) {
+        return false; // idle at start: nothing to reset
+    }
+    session.start();
+    session.advance(7000);
+    return !session.canReset(); // running: Down must be ignored
+}
+
+(:test)
+function testCanResetWhenPausedOrComplete(logger as Test.Logger) as Boolean {
+    var paused = new BreathingSession(boxPattern(), null);
+    paused.start();
+    paused.advance(7000);
+    paused.pause();
+    var complete = new BreathingSession(boxPattern(), 1);
+    complete.start();
+    complete.advance(12000);
+    return paused.canReset() && complete.isComplete() && complete.canReset();
+}
+
+(:test)
 function testResetFromCompleteIsIdle(logger as Test.Logger) as Boolean {
     var session = new BreathingSession(boxPattern(), 1);
     session.start();

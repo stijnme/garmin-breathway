@@ -69,6 +69,13 @@ class BreathingSession {
         return _phaseIndex == 0 && _elapsedMs == 0 && _cyclesCompleted == 0;
     }
 
+    // Whether a user-initiated reset (Down button) is allowed: only while
+    // paused (including the auto-paused complete state), and only if there
+    // is progress to discard. A running session can't be reset by accident.
+    function canReset() as Boolean {
+        return !_running && !isAtStart();
+    }
+
     function setTargetCycles(targetCycles as Number?) as Void {
         _targetCycles = targetCycles;
     }

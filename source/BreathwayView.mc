@@ -90,12 +90,12 @@ class BreathwayView extends WatchUi.View {
     }
 
     // Resets the session back to phase 0 (Down button, see
-    // issues/0002-down-button-reset-session.md). Keeps the running/paused
-    // state: a running session restarts from Inhale, a paused or completed
-    // one lands on the idle start screen. No-op when already at the start.
+    // issues/0002-down-button-reset-session.md). Only works while paused or
+    // complete, landing on the idle start screen; ignored while running or
+    // when already at the start (see BreathingSession.canReset()).
     function resetSession() as Void {
         var session = _session as BreathingSession;
-        if (session.isAtStart()) {
+        if (!session.canReset()) {
             return;
         }
         session.reset();
