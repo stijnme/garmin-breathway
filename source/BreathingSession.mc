@@ -62,6 +62,13 @@ class BreathingSession {
         _cyclesCompleted = 0;
     }
 
+    // True when the session sits at its very beginning: first phase, zero
+    // elapsed time, no cycles completed. Combined with !isRunning() this is
+    // the idle "ready to start" state.
+    function isAtStart() as Boolean {
+        return _phaseIndex == 0 && _elapsedMs == 0 && _cyclesCompleted == 0;
+    }
+
     function setTargetCycles(targetCycles as Number?) as Void {
         _targetCycles = targetCycles;
     }

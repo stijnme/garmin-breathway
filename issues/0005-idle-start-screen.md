@@ -1,6 +1,9 @@
 # 0005 — Show a start screen instead of auto-starting the session on launch
 
-**Status:** open (feature request)
+**Status:** resolved (v0.4.0) — `BreathwayView.onShow()` no longer
+auto-starts; the session opens idle ("Select to start") and Select starts
+it. Idle = `!isRunning() && BreathingSession.isAtStart()`. Icon-based start
+affordance still pending in 0004.
 **Filed:** 2026-09-21
 
 ## Summary

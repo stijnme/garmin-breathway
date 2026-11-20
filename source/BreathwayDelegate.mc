@@ -24,6 +24,12 @@ class BreathwayDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    // Down button: reset the session back to phase 0.
+    function onNextPage() as Boolean {
+        _view.resetSession();
+        return true;
+    }
+
     function onBack() as Boolean {
         // Let the system pop the view / exit the app.
         return false;

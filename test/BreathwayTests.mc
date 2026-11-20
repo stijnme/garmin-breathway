@@ -184,6 +184,43 @@ function testResetFromCompleteAllowsRestart(logger as Test.Logger) as Boolean {
     return !session.isComplete() && session.isRunning() && session.cyclesCompleted() == 0;
 }
 
+// --- Idle start state / reset (issues 0005, 0002) ---------------------------
+
+(:test)
+function testIsAtStartOnFreshSession(logger as Test.Logger) as Boolean {
+    var session = new BreathingSession(boxPattern(), 2);
+    return !session.isRunning() && session.isAtStart();
+}
+
+(:test)
+function testIsAtStartFalseAfterAdvance(logger as Test.Logger) as Boolean {
+    var session = new BreathingSession(boxPattern(), null);
+    session.start();
+    session.advance(100);
+    return !session.isAtStart();
+}
+
+(:test)
+function testResetRestoresIsAtStartAndKeepsRunning(logger as Test.Logger) as Boolean {
+    var session = new BreathingSession(boxPattern(), null);
+    session.start();
+    session.advance(7000);
+    session.reset();
+    return session.isAtStart() && session.isRunning();
+}
+
+(:test)
+function testResetFromCompleteIsIdle(logger as Test.Logger) as Boolean {
+    var session = new BreathingSession(boxPattern(), 1);
+    session.start();
+    session.advance(12000);
+    if (!session.isComplete()) {
+        return false;
+    }
+    session.reset();
+    return !session.isRunning() && session.isAtStart() && !session.isComplete();
+}
+
 // --- Pure helper functions (BreathingSession.patternDurationSeconds,
 // BreathwaySettings.targetCyclesFor, BreathingPatterns) --------------------
 

@@ -41,8 +41,9 @@ class BreathwayView extends WatchUi.View {
         var targetCycles = BreathwaySettings.targetCyclesFor(pattern, minutes);
         _hapticsEnabled = BreathwaySettings.hapticsEnabled();
 
+        // Start idle (not running) so the user explicitly starts the run
+        // with Select; see issues/0005-idle-start-screen.md.
         _session = new BreathingSession(pattern, targetCycles);
-        (_session as BreathingSession).start();
         startTimer();
     }
 
@@ -85,6 +86,19 @@ class BreathwayView extends WatchUi.View {
         } else {
             session.togglePause();
         }
+        WatchUi.requestUpdate();
+    }
+
+    // Resets the session back to phase 0 (Down button, see
+    // issues/0002-down-button-reset-session.md). Keeps the running/paused
+    // state: a running session restarts from Inhale, a paused or completed
+    // one lands on the idle start screen. No-op when already at the start.
+    function resetSession() as Void {
+        var session = _session as BreathingSession;
+        if (session.isAtStart()) {
+            return;
+        }
+        session.reset();
         WatchUi.requestUpdate();
     }
 
@@ -156,7 +170,8 @@ class BreathwayView extends WatchUi.View {
         dc.drawText(centerX, height * 0.78, Graphics.FONT_SMALL, remaining.toString(), Graphics.TEXT_JUSTIFY_CENTER);
 
         if (!session.isRunning()) {
-            dc.drawText(centerX, height * 0.9, Graphics.FONT_XTINY, "Paused", Graphics.TEXT_JUSTIFY_CENTER);
+            var hint = session.isAtStart() ? "Select to start" : "Paused";
+            dc.drawText(centerX, height * 0.9, Graphics.FONT_XTINY, hint, Graphics.TEXT_JUSTIFY_CENTER);
         }
     }
 }
